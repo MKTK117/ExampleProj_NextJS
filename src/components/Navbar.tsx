@@ -4,9 +4,13 @@ import { Icons } from "./icons";
 import NavItems from "./Navitems";
 import { buttonVariants } from "./ui/button";
 import Cart from "./cart";
+import { getServerSideUser } from "@/lib/payload-utils";
+import { cookies } from "next/headers";
+import UserAccountNav from "./userAccountNav";
 
-const Navbar = () => {
-  const user = null;
+const Navbar = async () => {
+  const nextCookies = cookies();
+  const { user } = await getServerSideUser(nextCookies);
 
   return (
     <div className="bg-white z-50 top-0 sticky inset-x-0 h-16">
@@ -17,7 +21,7 @@ const Navbar = () => {
               {/* TODO: Mobile nav */}
 
               <div className="ml-4 flex lg:ml-0">
-                <Link href="www.linkedin.com/in/mktk117">
+                <Link href="/">
                   <Icons.logo className="h-10 w-10" />
                 </Link>
               </div>
@@ -42,7 +46,7 @@ const Navbar = () => {
                   )}
 
                   {user ? (
-                    <p></p>
+                    <UserAccountNav user={user} />
                   ) : (
                     <Link
                       href="/sign-up"
