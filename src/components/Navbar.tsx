@@ -7,6 +7,7 @@ import Cart from "./cart";
 import { getServerSideUser } from "@/lib/payload-utils";
 import { cookies } from "next/headers";
 import UserAccountNav from "./userAccountNav";
+import { useEffect } from "react";
 
 const Navbar = async () => {
   const nextCookies = cookies();
